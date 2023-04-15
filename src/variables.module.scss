@@ -1,0 +1,10 @@
+//colors
+$primary: #3f3f3f;
+
+//breakpoints
+$mobile: 768px;
+
+:export {
+  primary: $primary;
+  mobile: $mobile;
+}
