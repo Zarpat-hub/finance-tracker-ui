@@ -1,12 +1,11 @@
 import './App.scss'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+import Register from './pages/Register'
 
-function App() {
-  return (
-    <div>
-      <h2>Hello world</h2>
-    </div>
-  )
-}
+const App = () => (
+  <Routes>
+    <Route path={'/register'} element={<Register />} />
+  </Routes>
+)
 
 export default App
