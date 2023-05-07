@@ -25,10 +25,26 @@ export const registerFormFields: IFormField[] = [
   },
   {
     name: 'confirm password',
-    pattern: /^$/,
+    pattern: /(.*?)/,
     errorMessage: "Passwords aren't equal",
     required: true,
     type: 'password',
     checkEqual: 'password',
+  },
+]
+
+export const loginFormFields: IFormField[] = [
+  {
+    name: 'username', // change to email if backend changes
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+  },
+  {
+    name: 'password',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'password',
   },
 ]
