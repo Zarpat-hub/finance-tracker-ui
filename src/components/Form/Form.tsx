@@ -8,15 +8,23 @@ import {
 } from './styled'
 import { IFormField } from '../../types'
 import { equalityCheck } from '../../app/helpers/mainHelper'
+import WealthWiseLogo from '../../assets/logos/wealthWiseMain.svg'
 
 type Props = {
   title: string
   formFields: IFormField[]
   submitText: string
   onSubmitHandler: (data: FieldValues) => void
+  showLogo?: boolean
 }
 
-const Form = ({ title, formFields, submitText, onSubmitHandler }: Props) => {
+const Form = ({
+  title,
+  formFields,
+  submitText,
+  onSubmitHandler,
+  showLogo,
+}: Props) => {
   const {
     handleSubmit,
     formState: { errors },
@@ -29,6 +37,7 @@ const Form = ({ title, formFields, submitText, onSubmitHandler }: Props) => {
   return (
     <FormContainer onSubmit={handleSubmit(onSubmitHandler)}>
       <FormTitle>{title}</FormTitle>
+      {showLogo && <img src={WealthWiseLogo} />}
       <FieldsContainer>
         {formFields.map(
           (
