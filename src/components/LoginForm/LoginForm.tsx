@@ -4,9 +4,12 @@ import { Form } from '../Form'
 import { loginFormFields } from '../../data/fields'
 import { Snackbar } from '@mui/material'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import AxiosInstance from '../../app/services/AxiosInstance'
 
 const LoginForm = () => {
   const methods = useForm()
+  const navigate = useNavigate()
   const { reset } = methods
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
@@ -18,16 +21,18 @@ const LoginForm = () => {
   const handleFormSubmit = async (data: FieldValues) => {
     const { username, password } = data
     try {
-      const res = await axios.post('https://localhost:7083/token', {
+      const res = await AxiosInstance.post('/token', {
         // ++ handle res.status, redirect && error
         username, // change to email if backend changes
         password,
       })
 
       reset()
-      console.log(res.data)
+      localStorage.setItem('jwtToken', res.data)
       setMessage('Successfully signed in. Redirecting ...')
       setIsOpen(true)
+
+      navigate('/user/goals')
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.message)
