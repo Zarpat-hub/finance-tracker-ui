@@ -6,7 +6,6 @@ import { Snackbar } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AxiosInstance from '../../app/services/AxiosInstance'
-import { useUser } from '../../app/context/UserContext'
 
 const LoginForm = () => {
   const methods = useForm()
@@ -19,8 +18,6 @@ const LoginForm = () => {
     setIsOpen(false)
   }
 
-  const { update } = useUser()
-
   const handleFormSubmit = async (data: FieldValues) => {
     const { username, password } = data
     try {
@@ -31,11 +28,10 @@ const LoginForm = () => {
       })
 
       reset()
-      console.log(res.data)
       localStorage.setItem('jwtToken', res.data)
       setMessage('Successfully signed in. Redirecting ...')
       setIsOpen(true)
-      update()
+
       navigate('/user/goals')
     } catch (error) {
       if (axios.isAxiosError(error)) {

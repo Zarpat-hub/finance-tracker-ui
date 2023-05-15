@@ -1,17 +1,14 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import WealthWiseLogo from '../../assets/logos/wealthWiseMain.svg'
-import { useUser } from '../../app/context/UserContext'
-import './Nav.scss'
 import { Button, Menu, MenuItem } from '@mui/material'
 import React from 'react'
+import { NavBar, NavBarLogo, NavBarUser } from './styled'
 
 const Nav = () => {
   const navigate = useNavigate()
-  const { logout } = useUser()
 
   const handleLogout = () => {
     localStorage.removeItem('jwtToken')
-    logout()
     navigate('/')
   }
 
@@ -31,17 +28,17 @@ const Nav = () => {
   }
 
   return (
-    <nav className="nav">
-      <section className="nav__logo">
-        <img src={WealthWiseLogo} className="nav__logo--img" />
+    <NavBar>
+      <NavBarLogo>
+        <img src={WealthWiseLogo} />
         <NavLink to="goals" className="link">
           My goals
         </NavLink>
         <NavLink to="balance" className="link">
           Balance
         </NavLink>
-      </section>
-      <section className="nav__user">
+      </NavBarLogo>
+      <NavBarUser>
         <Button
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
@@ -63,8 +60,8 @@ const Nav = () => {
           <MenuItem onClick={handleProfile}>Profile</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
-      </section>
-    </nav>
+      </NavBarUser>
+    </NavBar>
   )
 }
 
