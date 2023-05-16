@@ -1,13 +1,12 @@
 import { NavLink } from 'react-router-dom'
 import {
-  Button1,
   ButtonSection,
+  ButtonStyle,
   HeaderSection,
   LandingPageInfoPanel,
   LandingPageSlajderInfo,
 } from './styled'
-
-import WealthWiseLogo from '../../../assets/logos/wealthWiseMain.svg'
+import CarouselPanel from '../Carousel/Carousel'
 
 const Header = () => {
   return (
@@ -17,15 +16,15 @@ const Header = () => {
         <p>Your personal Finance Tracker</p>
         <ButtonSection>
           <NavLink to="/login" className="link">
-            <Button1 variant="contained">Sign In</Button1>
+            <ButtonStyle variant="contained">Sign In</ButtonStyle>
           </NavLink>
           <NavLink to="/register" className="link">
-            <Button1 variant="contained">Register</Button1>
+            <ButtonStyle variant="contained">Register</ButtonStyle>
           </NavLink>
         </ButtonSection>
       </LandingPageInfoPanel>
       <LandingPageSlajderInfo>
-        <img src={WealthWiseLogo} />
+        <CarouselPanel />
       </LandingPageSlajderInfo>
     </HeaderSection>
   )

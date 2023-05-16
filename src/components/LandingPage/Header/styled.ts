@@ -31,16 +31,14 @@ export const ButtonSection = styled('div')({
 })
 
 export const LandingPageSlajderInfo = styled('section')({
-  height: '200px',
-  display: 'flex',
-  justifyContent: 'center',
+  width: '400px',
 
   '@media screen and (max-width: 600px)': {
     display: 'none',
   },
 })
 
-export const Button1 = styled(Button)({
+export const ButtonStyle = styled(Button)({
   padding: '10px 30px',
 })
 
@@ -49,6 +47,7 @@ export const FinanceTrackerInfo = styled('section')({
   justifyContent: 'center',
 })
 
-export const Test = styled('div')({
-  width: '1200px',
+export const ItemStyle = styled('section')({
+  display: 'flex',
+  justifyContent: 'center',
 })

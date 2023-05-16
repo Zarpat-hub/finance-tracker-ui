@@ -14,8 +14,7 @@ const Cards = () => {
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           sx={{ height: 140 }}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="green iguana"
+          image="/static/images/cards/contemplative-reptile.jpg" // change
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -30,8 +29,7 @@ const Cards = () => {
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           sx={{ height: 140 }}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="green iguana"
+          image="/static/images/cards/contemplative-reptile.jpg" // change
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -46,8 +44,7 @@ const Cards = () => {
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           sx={{ height: 140 }}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="green iguana"
+          image="/static/images/cards/contemplative-reptile.jpg" // change
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
