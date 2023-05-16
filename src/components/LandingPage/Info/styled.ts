@@ -10,7 +10,6 @@ export const Section = styled('section')({
 export const SectionValue = styled('section')({
   width: '1200px',
   '& p': {
-    // color: 'red',
     textAlign: 'center',
     fontSize: '2rem',
   },

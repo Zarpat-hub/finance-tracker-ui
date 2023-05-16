@@ -31,8 +31,10 @@ export const ButtonSection = styled('div')({
 })
 
 export const LandingPageSlajderInfo = styled('section')({
-  height: '400px',
-  backgroundColor: 'red',
+  height: '200px',
+  display: 'flex',
+  justifyContent: 'center',
+
   '@media screen and (max-width: 600px)': {
     display: 'none',
   },

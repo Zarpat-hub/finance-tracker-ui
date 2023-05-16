@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <HeaderSection>
       <LandingPageInfoPanel>
-        <h2>Welcome to</h2>
+        <h2>Welcome to WealthWise</h2>
         <p>Your personal Finance Tracker</p>
         <ButtonSection>
           <NavLink to="/login" className="link">
