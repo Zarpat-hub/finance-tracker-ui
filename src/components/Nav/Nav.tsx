@@ -30,7 +30,9 @@ const Nav = () => {
   return (
     <NavBar>
       <NavBarLogo>
-        <img src={WealthWiseLogo} />
+        <NavLink to="goals" className="link">
+          <img src={WealthWiseLogo} />
+        </NavLink>
         <NavLink to="goals" className="link">
           My goals
         </NavLink>

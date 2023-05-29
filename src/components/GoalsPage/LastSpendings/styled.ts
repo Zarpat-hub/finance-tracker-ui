@@ -1,0 +1,39 @@
+import { styled } from '@mui/material/styles'
+import TableCell, { tableCellClasses } from '@mui/material/TableCell'
+import TableRow from '@mui/material/TableRow'
+
+export const SpendingNav = styled('section')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '20px 0',
+})
+
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}))
+
+export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}))
+
+export function createData(
+  name: string,
+  calories: number,
+  fat: number,
+  carbs: number,
+  protein: number
+) {
+  return { name, calories, fat, carbs, protein }
+}

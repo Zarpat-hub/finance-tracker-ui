@@ -5,6 +5,8 @@ export const NavBar = styled('nav')({
   width: '100%',
   height: '100px',
   justifyContent: 'space-between',
+  padding: '0 10px',
+  backgroundColor: '#4682B4',
 })
 
 export const NavBarLogo = styled('section')({
