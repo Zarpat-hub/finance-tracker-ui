@@ -16,6 +16,8 @@ export const Container = styled('section')({
 })
 
 export const CardComponent = styled(Card)({
+  textAlign: 'center',
+
   '@media screen and (max-width: 800px)': {
     width: '100%',
   },

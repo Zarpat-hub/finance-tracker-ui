@@ -1,4 +1,6 @@
+import { Button } from '@mui/material'
 import { styled } from '@mui/system'
+import { NavLink } from 'react-router-dom'
 
 export const NavBar = styled('nav')({
   display: 'flex',
@@ -22,4 +24,20 @@ export const NavBarUser = styled('section')({
   display: 'flex',
   alignItems: 'center',
   gap: '20px',
+})
+
+export const NavBarButton = styled(Button)({
+  backgroundColor: 'whitesmoke',
+  width: '60px',
+  height: '60px',
+  borderRadius: '50%',
+
+  '&:hover': {
+    color: 'whitesmoke',
+  },
+})
+
+export const NavBarMenuItem = styled(NavLink)({
+  color: 'whitesmoke',
+  textDecoration: 'none',
 })

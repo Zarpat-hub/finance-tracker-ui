@@ -10,7 +10,7 @@ export const SpendingNav = styled('section')({
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#4682B4',
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -27,13 +27,3 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }))
-
-export function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein }
-}

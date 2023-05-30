@@ -2,7 +2,13 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import WealthWiseLogo from '../../assets/logos/wealthWiseMain.svg'
 import { Button, Menu, MenuItem } from '@mui/material'
 import React from 'react'
-import { NavBar, NavBarLogo, NavBarUser } from './styled'
+import {
+  NavBar,
+  NavBarButton,
+  NavBarLogo,
+  NavBarMenuItem,
+  NavBarUser,
+} from './styled'
 
 const Nav = () => {
   const navigate = useNavigate()
@@ -30,18 +36,14 @@ const Nav = () => {
   return (
     <NavBar>
       <NavBarLogo>
-        <NavLink to="goals" className="link">
+        <NavLink to="goals">
           <img src={WealthWiseLogo} />
         </NavLink>
-        <NavLink to="goals" className="link">
-          My goals
-        </NavLink>
-        <NavLink to="balance" className="link">
-          Balance
-        </NavLink>
+        <NavBarMenuItem to="goals">My goals</NavBarMenuItem>
+        <NavBarMenuItem to="balance">Balance</NavBarMenuItem>
       </NavBarLogo>
       <NavBarUser>
-        <Button
+        <NavBarButton
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
           aria-haspopup="true"
@@ -49,7 +51,7 @@ const Nav = () => {
           onClick={handleClick}
         >
           User
-        </Button>
+        </NavBarButton>
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}
