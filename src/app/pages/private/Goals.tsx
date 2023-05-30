@@ -1,7 +1,11 @@
+import BasicInfo from '../../../components/GoalsPage/BasicInfo/BasicInfo'
+import LastSpendings from '../../../components/GoalsPage/LastSpendings/LastSpendings'
+
 const Goals = () => {
   return (
     <>
-      <h1>Goals</h1>
+      <BasicInfo />
+      <LastSpendings />
     </>
   )
 }
