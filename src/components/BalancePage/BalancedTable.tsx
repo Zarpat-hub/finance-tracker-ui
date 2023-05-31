@@ -12,28 +12,32 @@ import {
 } from '../GoalsPage/LastSpendings/styled'
 import { Action, ActionSection } from './styled'
 import { NavLink } from 'react-router-dom'
-
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import InfoIcon from '@mui/icons-material/Info'
+import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp'
 const BalancedTable = () => {
   const rows = [
     {
-      date: '2022-04-04',
-      category: 'AGD',
-      description: 'New TV',
-      amount: '2000',
+      prority: 'High',
+      name: 'New Car',
+      price: '2000',
+      timeToAchieve: '2000-04-15',
     },
     {
-      date: '2022-04-04',
-      category: 'AGD',
-      description: 'New TV',
-      amount: '2000',
+      prority: 'Minor',
+      name: 'New PC',
+      price: '3010',
+      timeToAchieve: '2020-05-14',
     },
   ]
 
   return (
     <>
-      <section>
+      <ActionSection>
         <h2>My Goals</h2>
-      </section>
+        <AddBoxSharpIcon />
+      </ActionSection>
 
       <section>
         <TableContainer component={Paper}>
@@ -50,24 +54,23 @@ const BalancedTable = () => {
               {rows.map((row, i) => (
                 <StyledTableRow key={i}>
                   <StyledTableCell component="th" scope="row" align="left">
-                    {row.date}
+                    {row.prority}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.category}</StyledTableCell>
-                  <StyledTableCell align="left">
-                    {row.description}
-                  </StyledTableCell>
+                  <StyledTableCell align="left">{row.name}</StyledTableCell>
+                  <StyledTableCell align="left">{row.price}</StyledTableCell>
                   <StyledTableCell align="left">
                     <ActionSection>
-                      <section>{row.amount}</section>
+                      <section>{row.timeToAchieve}</section>
                       <Action>
                         <NavLink to={'/user/balance/details/' + i.toString()}>
-                          De
+                          <InfoIcon />
                         </NavLink>
                         <NavLink to={'/user/balance/edit/' + i.toString()}>
-                          E
+                          <EditIcon />
                         </NavLink>
-
-                        <div>D</div>
+                        <div>
+                          <DeleteIcon />
+                        </div>
                       </Action>
                     </ActionSection>
                   </StyledTableCell>
