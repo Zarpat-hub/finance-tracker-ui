@@ -2,10 +2,11 @@ import { FieldValues, useForm, FormProvider } from 'react-hook-form'
 import axios from 'axios'
 import { Form } from '../Form'
 import { loginFormFields } from '../../data/fields'
-import { Snackbar } from '@mui/material'
+import { Box, Snackbar, Typography } from '@mui/material'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import AxiosInstance from '../../app/services/AxiosInstance'
+import { StyledLink } from './styled'
 
 const LoginForm = () => {
   const methods = useForm()
@@ -44,19 +45,25 @@ const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <Form
-        onSubmitHandler={handleFormSubmit}
-        title={'Welcome back to'}
-        submitText={'Sign in'}
-        formFields={loginFormFields}
-        showLogo
-      />
-      <Snackbar
-        open={isOpen}
-        autoHideDuration={2500}
-        message={message}
-        onClose={handleClose}
-      />
+      <Box sx={{ pb: 5 }}>
+        <Form
+          onSubmitHandler={handleFormSubmit}
+          title={'Welcome back to'}
+          submitText={'Sign in'}
+          formFields={loginFormFields}
+          showLogo
+        />
+        <Snackbar
+          open={isOpen}
+          autoHideDuration={2500}
+          message={message}
+          onClose={handleClose}
+        />
+        <Typography sx={{ maxWidth: '360px', textAlign: 'center' }}>
+          {'Don\t have any account?'}
+          <StyledLink to={'/register'}>Sign Up</StyledLink>
+        </Typography>
+      </Box>
     </FormProvider>
   )
 }
