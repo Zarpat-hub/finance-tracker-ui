@@ -11,6 +11,8 @@ import Goals from './pages/private/Goals'
 import GuardedRoute from './helpers/GuardedRoute'
 import RegistrationInfo from './pages/public/RegistrationInfo'
 import Profile from './pages/private/Profile'
+import GoalDetails from '../components/BalancePage/GoalsDetails/GoalDetails'
+import GoalEdit from '../components/BalancePage/GoalsEdit/GoalEdit'
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
       <Route path={'/user'} element={<GuardedRoute element={UserPage} />}>
         <Route index path={'goals'} element={<Goals />} />
         <Route path={'balance'} element={<Balance />} />
+        <Route path={'balance/details/:id'} element={<GoalDetails />} />
+        <Route path={'balance/edit/:id'} element={<GoalEdit />} />
         <Route path={'profile'} element={<Profile />} />
       </Route>
       <Route path="*" element={<NotFound />} />
