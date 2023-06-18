@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import AxiosInstance from '../../../app/services/AxiosInstance'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { Snackbar } from '@mui/material'
 
 interface IFormInput {
   oldPassword: string
@@ -16,14 +17,13 @@ interface IFormInput {
 }
 
 const ChangePasswordDialog = () => {
-  const { register, handleSubmit } = useForm<IFormInput>()
-  const methods = useForm()
-  const { reset } = methods
-
+  const { register, handleSubmit, reset } = useForm<IFormInput>()
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       await AxiosInstance.post('/User/change-password', data)
       reset()
+      setMessage('Password is changed')
+      setIsSnackbarOpen(true)
       handleClose()
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -39,6 +39,13 @@ const ChangePasswordDialog = () => {
   }
   const handleClose = () => {
     setOpen(false)
+  }
+
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const handleSnackbarClose = () => {
+    setIsSnackbarOpen(false)
   }
 
   return (
@@ -84,6 +91,12 @@ const ChangePasswordDialog = () => {
           </form>
         </DialogContent>
       </Dialog>
+      <Snackbar
+        open={isSnackbarOpen}
+        autoHideDuration={1000}
+        message={message}
+        onClose={handleSnackbarClose}
+      />
     </>
   )
 }
