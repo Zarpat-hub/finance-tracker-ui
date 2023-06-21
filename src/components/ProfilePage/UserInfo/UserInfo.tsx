@@ -1,6 +1,15 @@
-import { TextField, Button } from '@mui/material'
+import { TextField, Button, Snackbar } from '@mui/material'
 import ChangePasswordDialog from '../ChangePasswordDialog/ChangePasswordDialog'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import AxiosInstance from '../../../app/services/AxiosInstance'
+import { useState } from 'react'
+import {
+  ButtonsSection,
+  ControlsSection,
+  Header,
+  MainContainer,
+  UserImg,
+} from './styled'
 
 interface IFormInput {
   username: string
@@ -8,45 +17,73 @@ interface IFormInput {
 }
 
 const UserInfo = () => {
-  const { register, handleSubmit } = useForm<IFormInput>({
+  const { register, getValues } = useForm<IFormInput>({
+    // use value from state
     defaultValues: {
-      username: 'test',
-      email: 'test2',
+      username: 'string',
+      email: 'test2@2.pl',
     },
   })
-  const methods = useForm()
-  const { reset } = methods
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log(data)
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const handleSnackbarClose = () => {
+    setIsSnackbarOpen(false)
+  }
+
+  const handleClick = async () => {
+    try {
+      await AxiosInstance.post('/User/edit', getValues())
+      setMessage('Profile edited')
+      setIsSnackbarOpen(true)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
     <>
-      <h2>Edit your profile</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name1"
-          label="Current password"
-          type="text"
-          fullWidth
-          variant="standard"
-          {...register('username')}
+      <MainContainer>
+        <Header>Edit your profile</Header>
+        <UserImg>Test</UserImg>
+        <form>
+          <ControlsSection>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name1"
+              label="username"
+              type="text"
+              variant="standard"
+              disabled={true}
+              {...register('username')}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              required={true}
+              id="name2"
+              label="E-mail"
+              type="email"
+              variant="standard"
+              {...register('email')}
+            />
+          </ControlsSection>
+        </form>
+        <ButtonsSection>
+          <ChangePasswordDialog />
+          <Button variant="contained" onClick={handleClick}>
+            Save
+          </Button>
+        </ButtonsSection>
+        <Snackbar
+          open={isSnackbarOpen}
+          autoHideDuration={2000}
+          message={message}
+          onClose={handleSnackbarClose}
         />
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name2"
-          type="text"
-          fullWidth
-          variant="standard"
-          {...register('email')}
-        />
-        <Button type="submit">Save</Button>
-      </form>
-      <ChangePasswordDialog />
+      </MainContainer>
     </>
   )
 }

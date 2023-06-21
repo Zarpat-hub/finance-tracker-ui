@@ -8,7 +8,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import AxiosInstance from '../../../app/services/AxiosInstance'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { Snackbar } from '@mui/material'
+import { DialogActions, Snackbar } from '@mui/material'
 
 interface IFormInput {
   oldPassword: string
@@ -60,7 +60,7 @@ const ChangePasswordDialog = () => {
             <TextField
               autoFocus
               margin="dense"
-              id="name1"
+              id="currentPassoword"
               label="Current password"
               type="password"
               fullWidth
@@ -70,24 +70,36 @@ const ChangePasswordDialog = () => {
             <TextField
               autoFocus
               margin="dense"
-              id="name2"
+              id="newPassword"
               label="New password"
               type="password"
               fullWidth
               variant="standard"
-              {...register('newPassword')}
+              {...(register('newPassword'),
+              {
+                required: true,
+                pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+              })}
             />
             <TextField
               autoFocus
               margin="dense"
-              id="name3"
+              id="retypedNewPassword"
               label="Retype new password"
               type="password"
               fullWidth
               variant="standard"
-              {...register('retypedNewPassword')}
+              {...(register('retypedNewPassword'),
+              {
+                required: true,
+                pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+              })}
             />
-            <Button type="submit">Change password</Button>
+            <DialogActions>
+              <Button variant="contained" type="submit">
+                Change password
+              </Button>
+            </DialogActions>
           </form>
         </DialogContent>
       </Dialog>
