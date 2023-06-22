@@ -45,10 +45,10 @@ const BasicInfo = () => {
           </CardContent>
         </CardComponent>
         <CardComponent>
-          <NavLink to="/user/profile" className="link">
+          <NavLink to="/user/add-earning" className="link">
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
-                Configure your incomes
+                Add new earning
               </Typography>
             </CardContent>
           </NavLink>

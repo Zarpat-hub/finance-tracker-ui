@@ -75,6 +75,7 @@ export const SelectHelperText = styled(FormHelperText)({
   '&::first-letter': {
     textTransform: 'uppercase',
   },
+  marginBottom: '20px',
 })
 
 export const StyledSelect = styled(Select)({

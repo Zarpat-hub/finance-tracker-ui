@@ -131,14 +131,6 @@ export const spendingFields: IFormField[] = [
     ],
   },
   {
-    name: 'type',
-    pattern: /(.*?)/,
-    errorMessage: '',
-    required: true,
-    type: 'select',
-    options: ['Single', 'Constant'],
-  },
-  {
     name: 'frequence',
     pattern: /(.*?)/,
     errorMessage: '',
@@ -151,6 +143,22 @@ export const spendingFields: IFormField[] = [
     pattern: /(.*?)/,
     errorMessage: '',
     required: false,
+  },
+  {
+    name: 'value',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'number',
+  },
+]
+
+export const earningFields: IFormField[] = [
+  {
+    name: 'name',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
   },
   {
     name: 'value',
