@@ -1,4 +1,12 @@
-import { Box, Button, TextField, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  FormHelperText,
+  InputLabel,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { styled } from '@mui/system'
 
 export const FormContainer = styled('form')({
@@ -52,4 +60,26 @@ export const FieldsContainer = styled(Box)({
   padding: '0.5rem',
   width: '100%',
   maxWidth: '320px',
+})
+
+export const SelectLabel = styled(InputLabel)({
+  padding: '0.5rem 0',
+  '&::first-letter': {
+    textTransform: 'uppercase',
+  },
+})
+
+export const SelectHelperText = styled(FormHelperText)({
+  padding: '0 14px',
+  color: '#d32f2f',
+  '&::first-letter': {
+    textTransform: 'uppercase',
+  },
+})
+
+export const StyledSelect = styled(Select)({
+  '& .MuiSelect-select': {
+    paddingTop: '9px',
+    paddingBottom: '9px',
+  },
 })

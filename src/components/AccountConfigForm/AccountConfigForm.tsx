@@ -5,9 +5,8 @@ import { configurationFields } from '../../data/fields'
 import { Box, Snackbar } from '@mui/material'
 import { useState } from 'react'
 import AxiosInstance from '../../app/services/AxiosInstance'
-import { createActionBaseUpdate , BaseConfig } from '../../state/accountConfig'
+import { createActionBaseUpdate, BaseConfig } from '../../state/accountConfig'
 import { useDispatch, useSelector } from 'react-redux'
-
 
 const AccountConfigForm = () => {
   const methods = useForm()
@@ -32,17 +31,20 @@ const AccountConfigForm = () => {
   }
 
   const updateDbConfig = async (config: BaseConfig) => {
-      try {
-        const res = await AxiosInstance.post('/config', {...configState, ...config})
-        setMessage('Configuration was successfully saved')
+    try {
+      const res = await AxiosInstance.post('/config', {
+        ...configState,
+        ...config,
+      })
+      setMessage('Configuration was successfully saved')
+      setIsOpen(true)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(error.message)
+        setMessage('Wasn\t able to save configuration')
         setIsOpen(true)
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          console.log(error.message)
-          setMessage('Wasn\t able to save configuration')
-          setIsOpen(true)
-        }
       }
+    }
   }
 
   return (

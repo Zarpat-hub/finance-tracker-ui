@@ -5,4 +5,5 @@ export interface IFormField {
   required: boolean
   type?: string
   checkEqual?: string
+  options?: string[]
 }
