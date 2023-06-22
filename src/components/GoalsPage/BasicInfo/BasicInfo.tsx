@@ -1,8 +1,26 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { CardContent, Typography } from '@mui/material'
 import { CardComponent, Container } from './styled'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { BaseConfig } from '../../../state/accountConfig'
 
 const BasicInfo = () => {
+  const configState = useSelector((state: any) => state.accountConfig)
+  const { currency, spendingLimit, payDay, balance }: BaseConfig = configState
+
+  const calculateDaysLeftToPayDay = () => {
+    const currentDate = new Date()
+    const currentDay = currentDate.getDate()
+    const currentMonth = currentDate.getMonth()
+    const targetMonth = currentDay > payDay ? currentMonth + 1 : currentMonth
+    const targetYear = currentDate.getFullYear()
+    const targetDate = new Date(targetYear, targetMonth, payDay)
+    const timeDiff = targetDate.getTime() - currentDate.getTime()
+    const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
+
+    return daysLeft
+  }
+
   return (
     <>
       <Container>
@@ -12,7 +30,7 @@ const BasicInfo = () => {
               Monthly incomes
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              5237,63 PLN
+              5237,63{` ${currency}`}
             </Typography>
           </CardContent>
         </CardComponent>
@@ -22,7 +40,7 @@ const BasicInfo = () => {
               Annual incomes
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              62851,56
+              62851,56{` ${currency}`}
             </Typography>
           </CardContent>
         </CardComponent>
@@ -51,7 +69,7 @@ const BasicInfo = () => {
               Payday is in
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              20
+              {calculateDaysLeftToPayDay()}
             </Typography>
           </CardContent>
         </CardComponent>
@@ -63,7 +81,7 @@ const BasicInfo = () => {
               Accout Balance
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              2000,04PLN
+              {`${balance} ${currency}`}
             </Typography>
           </CardContent>
         </CardComponent>
@@ -73,7 +91,7 @@ const BasicInfo = () => {
               Monthly spending limit
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              2000,04PLN / 14324232 PLN
+              2000,04{` ${currency} / ${spendingLimit} ${currency}`}
             </Typography>
           </CardContent>
         </CardComponent>
