@@ -41,6 +41,7 @@ const Nav = () => {
         </NavLink>
         <NavBarMenuItem to="goals">My goals</NavBarMenuItem>
         <NavBarMenuItem to="balance">Balance</NavBarMenuItem>
+        <NavBarMenuItem to="config">Configuration</NavBarMenuItem>
       </NavBarLogo>
       <NavBarUser>
         <NavBarButton

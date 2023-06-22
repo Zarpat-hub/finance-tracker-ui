@@ -48,3 +48,115 @@ export const loginFormFields: IFormField[] = [
     type: 'password',
   },
 ]
+
+export const configurationFields: IFormField[] = [
+  {
+    name: 'currency',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+  },
+  {
+    name: 'balance',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'number',
+  },
+  {
+    name: 'payDay',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'number',
+  },
+  {
+    name: 'spendingLimit',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: false,
+    type: 'number',
+  },
+]
+
+export const goalFields: IFormField[] = [
+  {
+    name: 'name',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+  },
+  {
+    name: 'priority',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'select',
+    options: ['Low', 'Medium', 'High'],
+  },
+  {
+    name: 'deadline',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'date',
+  },
+  {
+    name: 'value',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'number',
+  },
+]
+
+export const spendingFields: IFormField[] = [
+  {
+    name: 'category',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'select',
+    options: [
+      'Food',
+      'Home',
+      'Transport',
+      'Healthcare',
+      'Clothes',
+      'Hygiene',
+      'Kids',
+      'Entertainment',
+      'Debt',
+      'Other',
+    ],
+  },
+  {
+    name: 'type',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'select',
+    options: ['Single', 'Constant'],
+  },
+  {
+    name: 'frequence',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'select',
+    options: ['Weekly', 'Monthly', 'Yearly'],
+  },
+  {
+    name: 'description',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: false,
+  },
+  {
+    name: 'value',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'number',
+  },
+]
