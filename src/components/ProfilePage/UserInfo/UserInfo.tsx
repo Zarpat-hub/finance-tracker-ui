@@ -2,13 +2,15 @@ import { TextField, Button, Snackbar } from '@mui/material'
 import ChangePasswordDialog from '../ChangePasswordDialog/ChangePasswordDialog'
 import { useForm } from 'react-hook-form'
 import AxiosInstance from '../../../app/services/AxiosInstance'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import {
+  ButtonUpload,
   ButtonsSection,
   ControlsSection,
   Header,
+  Label,
+  LabelImg,
   MainContainer,
-  UserImg,
 } from './styled'
 
 interface IFormInput {
@@ -28,6 +30,11 @@ const UserInfo = () => {
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const [message, setMessage] = useState('')
 
+  // mock -  take from userState
+  const [img, setImg] = useState(
+    'https://localhost:7083/UserFiles/string-test01.png'
+  )
+
   const handleSnackbarClose = () => {
     setIsSnackbarOpen(false)
   }
@@ -42,11 +49,47 @@ const UserInfo = () => {
     }
   }
 
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const formData = new FormData()
+      formData.append('formFile', e.target.files[0])
+      try {
+        const res = await AxiosInstance.post('/User/img', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'x-rapidapi-host': 'file-upload8.p.rapidapi.com',
+            'x-rapidapi-key': 'your-rapidapi-key-here',
+          },
+        })
+
+        // change user state
+        setImg(res.data)
+
+        setMessage('Img changed')
+        setIsSnackbarOpen(true)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
   return (
     <>
       <MainContainer>
         <Header>Edit your profile</Header>
-        <UserImg>Test</UserImg>
+        <ButtonUpload>
+          <Label htmlFor="upload-input">
+            <input
+              id="upload-input"
+              type="file"
+              hidden
+              accept="image/png, image/gif, image/jpeg"
+              onChange={handleFileChange}
+            />
+            <LabelImg src={img} />
+          </Label>
+        </ButtonUpload>
+
         <form>
           <ControlsSection>
             <TextField

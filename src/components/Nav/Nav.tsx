@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import WealthWiseLogo from '../../assets/logos/wealthWiseMain.svg'
 import { Button, Menu, MenuItem } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   NavBar,
   NavBarButton,
@@ -9,6 +9,7 @@ import {
   NavBarMenuItem,
   NavBarUser,
 } from './styled'
+import { LabelImg } from '../ProfilePage/UserInfo/styled'
 
 const Nav = () => {
   const navigate = useNavigate()
@@ -33,6 +34,11 @@ const Nav = () => {
     setAnchorEl(null)
   }
 
+  // mock - take from userState
+  const [img, setImg] = useState(
+    'https://localhost:7083/UserFiles/string-test01.png'
+  )
+
   return (
     <NavBar>
       <NavBarLogo>
@@ -50,7 +56,7 @@ const Nav = () => {
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
-          User
+          <LabelImg src={img} />
         </NavBarButton>
         <Menu
           id="basic-menu"
