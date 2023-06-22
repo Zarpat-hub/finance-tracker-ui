@@ -16,27 +16,20 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import InfoIcon from '@mui/icons-material/Info'
 import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp'
+import { useSelector } from 'react-redux'
+import { Config } from '../../state/accountConfig'
+
 const BalancedTable = () => {
-  const rows = [
-    {
-      prority: 'High',
-      name: 'New Car',
-      price: '2000',
-      timeToAchieve: '2000-04-15',
-    },
-    {
-      prority: 'Minor',
-      name: 'New PC',
-      price: '3010',
-      timeToAchieve: '2020-05-14',
-    },
-  ]
+  const configState = useSelector((state: any) => state.accountConfig)
+  const { goals }: Config = configState
 
   return (
     <>
       <ActionSection>
         <h2>My Goals</h2>
-        <AddBoxSharpIcon />
+        <NavLink to={'/user/add-goal'}>
+          <AddBoxSharpIcon />
+        </NavLink>
       </ActionSection>
 
       <section>
@@ -51,16 +44,16 @@ const BalancedTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, i) => (
+              {goals.map((goal, i) => (
                 <StyledTableRow key={i}>
                   <StyledTableCell component="th" scope="row" align="left">
-                    {row.prority}
+                    {goal.priority}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.name}</StyledTableCell>
-                  <StyledTableCell align="left">{row.price}</StyledTableCell>
+                  <StyledTableCell align="left">{goal.name}</StyledTableCell>
+                  <StyledTableCell align="left">{goal.value}</StyledTableCell>
                   <StyledTableCell align="left">
                     <ActionSection>
-                      <section>{row.timeToAchieve}</section>
+                      <section>{goal.deadline}</section>
                       <Action>
                         <NavLink to={'/user/balance/details/' + i.toString()}>
                           <InfoIcon />
