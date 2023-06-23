@@ -13,7 +13,7 @@ import { ChartCanvas, ChartOption, ChartSection, Option } from './styled'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
-enum TypesOfPeriod {
+enum TypesOfTime {
   WEEK = 'Week',
   MONTH = 'Month',
   YEAR = 'YEAR',
@@ -49,6 +49,11 @@ export const MockData = {
   ],
   incomes: [
     {
+      date: '2023-06-01',
+      value: 4500,
+      description: 'Car sell',
+    },
+    {
       date: '2023-01-01',
       value: 5000,
       description: 'Car sell',
@@ -83,7 +88,7 @@ const Months = [
 
 export const ChartComponent = () => {
   const [labels, setLabels] = useState<string[]>([...Months])
-  const [period, setPeriod] = useState<string>(TypesOfPeriod.YEAR)
+  const [time, setTime] = useState<string>(TypesOfTime.YEAR)
   const [dataChart, setDataChart] = useState<any>({
     labels,
     datasets: [],
@@ -105,41 +110,55 @@ export const ChartComponent = () => {
         },
       ],
     })
-  }, [period])
+  }, [time])
 
   const handlePeriod = (perdiod: string) => {
     switch (perdiod) {
-      case TypesOfPeriod.WEEK:
-        setPeriod(TypesOfPeriod.WEEK)
+      case TypesOfTime.WEEK:
+        setTime(TypesOfTime.WEEK)
         const curr = new Date()
-        const first = curr.getDate() - curr.getDay()
-        const last = first + 6
-        const newLabels = []
-        for (let i = first; i <= last; i++) {
+        const firstDayOfWeek = curr.getDate() - curr.getDay()
+        const lastDayOfWeek = firstDayOfWeek + 6
+        const daysOfWeek = []
+        for (let i = firstDayOfWeek; i <= lastDayOfWeek; i++) {
           const month =
             curr.getMonth() < 10
               ? '0' + (curr.getMonth() + 1).toString()
               : curr.getMonth() + 1
           const day = i < 10 ? '0' + i.toString() : i
           const yearString = `${curr.getFullYear()}-${month}-${day}`
-          newLabels.push(yearString)
+          daysOfWeek.push(yearString)
         }
-        setLabels(newLabels)
+        setLabels(daysOfWeek)
         break
-      case TypesOfPeriod.MONTH:
-        setPeriod(TypesOfPeriod.MONTH)
-        // daty z okresu tego miesiąca
+      case TypesOfTime.MONTH:
+        setTime(TypesOfTime.MONTH)
+        const curr1 = new Date()
+        const date = new Date(
+          Date.UTC(curr1.getFullYear(), curr1.getUTCMonth(), 1)
+        )
+        const days = []
+        while (date.getUTCMonth() === curr1.getUTCMonth()) {
+          days.push(new Date(date))
+          date.setUTCDate(date.getUTCDate() + 1)
+        }
+        const daysOfMonth: string[] = []
+        days.forEach((date: Date) => {
+          daysOfMonth.push(convertDateToString(date))
+        })
+        setLabels(daysOfMonth)
         break
-      case TypesOfPeriod.YEAR:
-        setPeriod(TypesOfPeriod.YEAR)
+      case TypesOfTime.YEAR:
+        setTime(TypesOfTime.YEAR)
         setLabels([...Months])
         break
     }
   }
 
   const prepareDataFn = (type: any) => {
-    switch (period) {
-      case TypesOfPeriod.WEEK:
+    switch (time) {
+      case TypesOfTime.WEEK:
+      case TypesOfTime.MONTH:
         const weekData = labels.map((label: string) => {
           const data = type.reduce((acc: number, curr: any) => {
             return label === curr.date ? acc + Number(curr.value) : acc + 0
@@ -147,9 +166,7 @@ export const ChartComponent = () => {
           return data
         })
         return weekData
-      case TypesOfPeriod.MONTH:
-        break
-      case TypesOfPeriod.YEAR:
+      case TypesOfTime.YEAR:
         const yearData = labels.map((label: string) => {
           const data = type.reduce((acc: number, curr: any) => {
             const date = new Date('2000 ' + label)
@@ -165,8 +182,17 @@ export const ChartComponent = () => {
     }
   }
 
-  const convertDateToString = () => {
-    // convert Date To String | add to helpers file
+  const convertDateToString = (date: Date) => {
+    const month =
+      date.getMonth() < 10
+        ? '0' + (date.getMonth() + 1).toString()
+        : date.getMonth() + 1
+
+    const day =
+      date.getDate() < 10 ? '0' + String(date.getDate()) : date.getDate()
+
+    const yearString = `${date.getFullYear()}-${month}-${day}`
+    return yearString
   }
 
   const options = {
@@ -180,11 +206,9 @@ export const ChartComponent = () => {
           <Bar options={options} data={dataChart} />
         </ChartCanvas>
         <ChartOption>
-          <Option onClick={() => handlePeriod(TypesOfPeriod.YEAR)}>Year</Option>
-          <Option onClick={() => handlePeriod(TypesOfPeriod.WEEK)}>Week</Option>
-          <Option onClick={() => handlePeriod(TypesOfPeriod.MONTH)}>
-            Month
-          </Option>
+          <Option onClick={() => handlePeriod(TypesOfTime.YEAR)}>Year</Option>
+          <Option onClick={() => handlePeriod(TypesOfTime.WEEK)}>Week</Option>
+          <Option onClick={() => handlePeriod(TypesOfTime.MONTH)}>Month</Option>
         </ChartOption>
       </ChartSection>
     </>
