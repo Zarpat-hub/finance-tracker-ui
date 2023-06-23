@@ -4,9 +4,12 @@ import { Form } from '../Form'
 import { loginFormFields } from '../../data/fields'
 import { Box, Snackbar, Typography } from '@mui/material'
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import AxiosInstance from '../../app/services/AxiosInstance'
 import { StyledLink } from './styled'
+import { useDispatch } from 'react-redux'
+import { createActionLoad } from '../../state/accountConfig'
+import { createUserActionLoad } from '../../state/userData'
 
 const LoginForm = () => {
   const methods = useForm()
@@ -14,6 +17,7 @@ const LoginForm = () => {
   const { reset } = methods
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
+  const dispatch = useDispatch()
 
   const handleClose = () => {
     setIsOpen(false)
@@ -30,6 +34,11 @@ const LoginForm = () => {
 
       reset()
       localStorage.setItem('jwtToken', res.data)
+      const resConfig = await AxiosInstance.get('/config')
+      dispatch(createActionLoad(resConfig.data))
+      const userData = await AxiosInstance.get('/User/me')
+      dispatch(createUserActionLoad(userData.data))
+
       setMessage('Successfully signed in. Redirecting ...')
       setIsOpen(true)
 

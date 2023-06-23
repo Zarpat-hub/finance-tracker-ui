@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import WealthWiseLogo from '../../assets/logos/wealthWiseMain.svg'
 import { Button, Menu, MenuItem } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   NavBar,
   NavBarButton,
@@ -9,6 +9,9 @@ import {
   NavBarMenuItem,
   NavBarUser,
 } from './styled'
+import { LabelImg } from '../ProfilePage/UserInfo/styled'
+import { useSelector } from 'react-redux'
+import { UserData } from '../../state/userData'
 
 const Nav = () => {
   const navigate = useNavigate()
@@ -33,6 +36,9 @@ const Nav = () => {
     setAnchorEl(null)
   }
 
+  const userState = useSelector((state: any) => state.userData)
+  const { userImg }: UserData = userState
+
   return (
     <NavBar>
       <NavBarLogo>
@@ -41,6 +47,7 @@ const Nav = () => {
         </NavLink>
         <NavBarMenuItem to="goals">My goals</NavBarMenuItem>
         <NavBarMenuItem to="balance">Balance</NavBarMenuItem>
+        <NavBarMenuItem to="config">Configuration</NavBarMenuItem>
       </NavBarLogo>
       <NavBarUser>
         <NavBarButton
@@ -50,7 +57,7 @@ const Nav = () => {
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
-          User
+          {userImg ? <LabelImg src={userImg} /> : <LabelImg />}
         </NavBarButton>
         <Menu
           id="basic-menu"

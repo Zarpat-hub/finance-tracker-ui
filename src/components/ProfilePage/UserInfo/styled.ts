@@ -1,4 +1,4 @@
-import { styled } from '@mui/material'
+import { Button, styled } from '@mui/material'
 
 export const MainContainer = styled('section')({
   display: 'flex',
@@ -42,4 +42,32 @@ export const UserImg = styled('div')({
 
 export const Header = styled('h2')({
   margin: '20px',
+})
+
+export const ButtonUpload = styled(Button)({
+  margin: '20px 0',
+  width: '100px',
+  height: '100px',
+  backgroundColor: 'whitesmoke',
+  borderRadius: '50px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+})
+
+export const Label = styled('label')({
+  width: '100%',
+  height: '100%',
+
+  '&: hover': {
+    cursor: 'pointer',
+  },
+})
+
+export const LabelImg = styled('img')({
+  width: '100%',
+  height: '100%',
+  backgroundColor: 'whitesmoke',
+  border: 'none',
+  borderRadius: '50px',
 })

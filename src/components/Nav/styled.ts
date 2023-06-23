@@ -27,14 +27,9 @@ export const NavBarUser = styled('section')({
 })
 
 export const NavBarButton = styled(Button)({
-  backgroundColor: 'whitesmoke',
   width: '60px',
   height: '60px',
   borderRadius: '50%',
-
-  '&:hover': {
-    color: 'whitesmoke',
-  },
 })
 
 export const NavBarMenuItem = styled(NavLink)({

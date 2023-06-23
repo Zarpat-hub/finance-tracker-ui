@@ -2,14 +2,22 @@ import { TextField, Button, Snackbar } from '@mui/material'
 import ChangePasswordDialog from '../ChangePasswordDialog/ChangePasswordDialog'
 import { useForm } from 'react-hook-form'
 import AxiosInstance from '../../../app/services/AxiosInstance'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import {
+  ButtonUpload,
   ButtonsSection,
   ControlsSection,
   Header,
+  Label,
+  LabelImg,
   MainContainer,
-  UserImg,
 } from './styled'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  UserData,
+  updateUserImg,
+  updateUserInfo,
+} from '../../../state/userData'
 
 interface IFormInput {
   username: string
@@ -17,11 +25,15 @@ interface IFormInput {
 }
 
 const UserInfo = () => {
+  const userState = useSelector((state: any) => state.userData)
+
+  const { userImg, username, email }: UserData = userState
+  const dispatch = useDispatch()
+
   const { register, getValues } = useForm<IFormInput>({
-    // use value from state
     defaultValues: {
-      username: 'string',
-      email: 'test2@2.pl',
+      username,
+      email,
     },
   })
 
@@ -36,9 +48,33 @@ const UserInfo = () => {
     try {
       await AxiosInstance.post('/User/edit', getValues())
       setMessage('Profile edited')
+      dispatch(updateUserInfo(getValues()))
       setIsSnackbarOpen(true)
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const formData = new FormData()
+      formData.append('formFile', e.target.files[0])
+      try {
+        const res = await AxiosInstance.post('/User/img', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'x-rapidapi-host': 'file-upload8.p.rapidapi.com',
+            'x-rapidapi-key': 'your-rapidapi-key-here',
+          },
+        })
+
+        // change user state
+        dispatch(updateUserImg(res.data))
+        setMessage('Img changed')
+        setIsSnackbarOpen(true)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -46,7 +82,19 @@ const UserInfo = () => {
     <>
       <MainContainer>
         <Header>Edit your profile</Header>
-        <UserImg>Test</UserImg>
+        <ButtonUpload>
+          <Label htmlFor="upload-input">
+            <input
+              id="upload-input"
+              type="file"
+              hidden
+              accept="image/png, image/gif, image/jpeg"
+              onChange={handleFileChange}
+            />
+            {userImg ? <LabelImg src={userImg} /> : <LabelImg />}
+          </Label>
+        </ButtonUpload>
+
         <form>
           <ControlsSection>
             <TextField
