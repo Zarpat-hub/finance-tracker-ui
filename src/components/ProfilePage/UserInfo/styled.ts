@@ -67,5 +67,7 @@ export const Label = styled('label')({
 export const LabelImg = styled('img')({
   width: '100%',
   height: '100%',
+  backgroundColor: 'whitesmoke',
+  border: 'none',
   borderRadius: '50px',
 })
