@@ -12,6 +12,12 @@ import {
   LabelImg,
   MainContainer,
 } from './styled'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  UserData,
+  updateUserImg,
+  updateUserInfo,
+} from '../../../state/userData'
 
 interface IFormInput {
   username: string
@@ -19,21 +25,20 @@ interface IFormInput {
 }
 
 const UserInfo = () => {
+  const userState = useSelector((state: any) => state.userData)
+
+  const { userImg, username, email }: UserData = userState
+  const dispatch = useDispatch()
+
   const { register, getValues } = useForm<IFormInput>({
-    // use value from state
     defaultValues: {
-      username: 'string',
-      email: 'test2@2.pl',
+      username,
+      email,
     },
   })
 
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const [message, setMessage] = useState('')
-
-  // mock -  take from userState
-  const [img, setImg] = useState(
-    'https://localhost:7083/UserFiles/string-test01.png'
-  )
 
   const handleSnackbarClose = () => {
     setIsSnackbarOpen(false)
@@ -43,6 +48,7 @@ const UserInfo = () => {
     try {
       await AxiosInstance.post('/User/edit', getValues())
       setMessage('Profile edited')
+      dispatch(updateUserInfo(getValues()))
       setIsSnackbarOpen(true)
     } catch (error) {
       console.log(error)
@@ -63,8 +69,7 @@ const UserInfo = () => {
         })
 
         // change user state
-        setImg(res.data)
-
+        dispatch(updateUserImg(res.data))
         setMessage('Img changed')
         setIsSnackbarOpen(true)
       } catch (error) {
@@ -86,7 +91,7 @@ const UserInfo = () => {
               accept="image/png, image/gif, image/jpeg"
               onChange={handleFileChange}
             />
-            <LabelImg src={img} />
+            {userImg ? <LabelImg src={userImg} /> : <LabelImg />}
           </Label>
         </ButtonUpload>
 

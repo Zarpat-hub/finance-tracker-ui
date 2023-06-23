@@ -10,6 +10,8 @@ import {
   NavBarUser,
 } from './styled'
 import { LabelImg } from '../ProfilePage/UserInfo/styled'
+import { useSelector } from 'react-redux'
+import { UserData } from '../../state/userData'
 
 const Nav = () => {
   const navigate = useNavigate()
@@ -34,10 +36,8 @@ const Nav = () => {
     setAnchorEl(null)
   }
 
-  // mock - take from userState
-  const [img, setImg] = useState(
-    'https://localhost:7083/UserFiles/string-test01.png'
-  )
+  const userState = useSelector((state: any) => state.userData)
+  const { userImg }: UserData = userState
 
   return (
     <NavBar>
@@ -57,7 +57,7 @@ const Nav = () => {
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
-          <LabelImg src={img} />
+          {userImg ? <LabelImg src={userImg} /> : <LabelImg />}
         </NavBarButton>
         <Menu
           id="basic-menu"
