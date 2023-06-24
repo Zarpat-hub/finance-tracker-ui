@@ -32,6 +32,11 @@ const Nav = () => {
     handleClose()
   }
 
+  const handleConfiguration = () => {
+    navigate('/user/config')
+    handleClose()
+  }
+
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -47,7 +52,6 @@ const Nav = () => {
         </NavLink>
         <NavBarMenuItem to="goals">My goals</NavBarMenuItem>
         <NavBarMenuItem to="balance">Balance</NavBarMenuItem>
-        <NavBarMenuItem to="config">Configuration</NavBarMenuItem>
       </NavBarLogo>
       <NavBarUser>
         <NavBarButton
@@ -69,6 +73,7 @@ const Nav = () => {
           }}
         >
           <MenuItem onClick={handleProfile}>Profile</MenuItem>
+          <MenuItem onClick={handleConfiguration}>Configuration</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </NavBarUser>
