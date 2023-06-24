@@ -3,6 +3,8 @@ const UPDATE_BASE = 'config/UPDATE_BASE'
 const ADD_CONSTANT_SPENDING = 'config/ADD_SPENDING'
 const ADD_EARNING = 'config/ADD_EARNING'
 const ADD_GOAL = 'config/ADD_GOAL'
+const EDIT_GOAL = 'config/EDIT_GOAL'
+const DELETE_GOAL = 'config/DELETE_GOAL'
 
 type Categories =
   | 'Food'
@@ -91,6 +93,20 @@ export const createActionGoalAdd = (goal: Goal) => {
   }
 }
 
+export const createActionEditGoal = (goal: Goal) => {
+  return {
+    type: EDIT_GOAL,
+    payload: goal,
+  }
+}
+
+export const createActionDeleteGoal = (goal: Goal) => {
+  return {
+    type: DELETE_GOAL,
+    payload: goal,
+  }
+}
+
 export const initialState: Config = {
   currency: '',
   balance: 0,
@@ -119,6 +135,15 @@ export const reducer = (
       return { ...state, earnings: [...state.earnings, action.payload] }
     case ADD_GOAL:
       return { ...state, goals: [...state.goals, action.payload] }
+    case DELETE_GOAL:
+      const index = state.goals.indexOf(action.payload)
+      const newArray = [...state.goals]
+      newArray.splice(index, 1)
+      return {
+        ...state,
+        goals: newArray,
+      }
+
     default:
       return state
   }
