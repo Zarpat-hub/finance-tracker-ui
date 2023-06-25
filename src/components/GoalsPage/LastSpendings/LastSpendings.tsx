@@ -8,6 +8,7 @@ import {
 } from '@mui/material'
 import { SpendingNav, StyledTableCell, StyledTableRow } from './styled'
 import { NavLink } from 'react-router-dom'
+import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp'
 
 const LastSpendings = () => {
   const rows = [
@@ -29,7 +30,9 @@ const LastSpendings = () => {
     <>
       <SpendingNav>
         <NavLink to="/user/add-spending" className="link">
-          <div>+ New Spending</div>
+          <div>
+            <AddBoxSharpIcon />
+          </div>
         </NavLink>
         <h3>Last Spendings</h3>
         <div>View More</div>

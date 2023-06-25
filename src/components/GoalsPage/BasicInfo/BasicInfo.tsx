@@ -1,5 +1,5 @@
 import { CardContent, Typography } from '@mui/material'
-import { CardComponent, Container } from './styled'
+import { CardCenterContent, CardComponent, Container } from './styled'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { BaseConfig } from '../../../state/accountConfig'
@@ -47,19 +47,17 @@ const BasicInfo = () => {
         <CardComponent>
           <NavLink to="/user/add-earning" className="link">
             <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
-                Add new earning
-              </Typography>
+              <CardCenterContent>
+                <p>Add new earning</p>
+              </CardCenterContent>
             </CardContent>
           </NavLink>
         </CardComponent>
         <CardComponent>
           <NavLink to="/user/analysis" className="link">
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
-                See Financial Analysis
-              </Typography>
-            </CardContent>
+            <CardCenterContent>
+              <p>See Financial Analysis</p>
+            </CardCenterContent>
           </NavLink>
         </CardComponent>
 
