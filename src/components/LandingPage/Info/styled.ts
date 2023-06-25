@@ -4,7 +4,8 @@ export const Section = styled('section')({
   display: 'flex',
   justifyContent: 'center',
   padding: '50px 20px',
-  backgroundColor: 'whitesmoke',
+  backgroundColor: '#444444',
+  color: 'whitesmoke',
 })
 
 export const SectionValue = styled('section')({

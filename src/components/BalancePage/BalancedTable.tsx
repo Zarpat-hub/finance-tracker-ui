@@ -74,7 +74,7 @@ const BalancedTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {goals.map((goal, i) => (
+              {goals?.map((goal, i) => (
                 <StyledTableRow key={i}>
                   <StyledTableCell component="th" scope="row" align="left">
                     {goal.priority}
