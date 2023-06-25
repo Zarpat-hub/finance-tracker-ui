@@ -13,6 +13,7 @@ import RegistrationInfo from './pages/public/RegistrationInfo'
 import Profile from './pages/private/Profile'
 import GoalDetails from '../components/BalancePage/GoalsDetails/GoalDetails'
 import GoalEdit from '../components/BalancePage/GoalsEdit/GoalEdit'
+import FinancialAnalisys from './pages/private/FinanialAnalysis'
 import Config from './pages/private/Config'
 import { ConstantSpendingForm } from '../components/ConstantSpendingForm'
 import { EarningForm } from '../components/EarningForm'
@@ -32,6 +33,7 @@ const App = () => {
         <Route path={'balance/details/:id'} element={<GoalDetails />} />
         <Route path={'balance/edit/:id'} element={<GoalEdit />} />
         <Route path={'profile'} element={<Profile />} />
+        <Route path={'analysis'} element={<FinancialAnalisys />} />
         <Route path={'config'} element={<Config />} />
         <Route path={'add-spending'} element={<ConstantSpendingForm />} />
         <Route path={'add-earning'} element={<EarningForm />} />
