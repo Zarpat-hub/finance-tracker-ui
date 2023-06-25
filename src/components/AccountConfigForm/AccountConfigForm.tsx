@@ -7,9 +7,11 @@ import { useState } from 'react'
 import AxiosInstance from '../../app/services/AxiosInstance'
 import { createActionBaseUpdate, BaseConfig } from '../../state/accountConfig'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const AccountConfigForm = () => {
   const methods = useForm()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const configState = useSelector((state: any) => state.accountConfig)
   const [isOpen, setIsOpen] = useState(false)
@@ -28,6 +30,7 @@ const AccountConfigForm = () => {
     }
     dispatch(createActionBaseUpdate(convertedData))
     await updateDbConfig(convertedData)
+    navigate('/user/goals')
   }
 
   const updateDbConfig = async (config: BaseConfig) => {

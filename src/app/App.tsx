@@ -18,6 +18,8 @@ import Config from './pages/private/Config'
 import { ConstantSpendingForm } from '../components/ConstantSpendingForm'
 import { EarningForm } from '../components/EarningForm'
 import { GoalForm } from '../components/GoalForm'
+import Welcome from './pages/private/Welcome'
+import FirstConfig from './pages/private/FirstConfig'
 
 const App = () => {
   return (
@@ -27,6 +29,8 @@ const App = () => {
       <Route path={'/register'} element={<Register />} />
       <Route path={'/register-info'} element={<RegistrationInfo />} />
       <Route path={'/login'} element={<Login />} />
+      <Route path={'/setup'} element={<GuardedRoute element={FirstConfig} />} />
+      <Route path={'/welcome'} element={<GuardedRoute element={Welcome} />} />
       <Route path={'/user'} element={<GuardedRoute element={UserPage} />}>
         <Route index path={'goals'} element={<Goals />} />
         <Route path={'balance'} element={<Balance />} />

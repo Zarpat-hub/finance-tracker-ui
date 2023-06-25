@@ -16,6 +16,7 @@ const ContentCenterWrapper = ({ children }: Props) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'column',
       }}
     >
       {children}
