@@ -18,6 +18,7 @@ const Nav = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('jwtToken')
+    localStorage.removeItem('WealthWise')
     navigate('/')
   }
 
