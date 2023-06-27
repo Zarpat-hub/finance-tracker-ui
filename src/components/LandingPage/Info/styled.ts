@@ -12,6 +12,6 @@ export const SectionValue = styled('section')({
   width: '1200px',
   '& p': {
     textAlign: 'center',
-    fontSize: '2rem',
+    fontSize: '1.5rem',
   },
 })

@@ -35,14 +35,18 @@ const LoginForm = () => {
       reset()
       localStorage.setItem('jwtToken', res.data)
       const resConfig = await AxiosInstance.get('/config')
-      dispatch(createActionLoad(resConfig.data))
-      const userData = await AxiosInstance.get('/User/me')
-      dispatch(createUserActionLoad(userData.data))
-
-      setMessage('Successfully signed in. Redirecting ...')
-      setIsOpen(true)
-
-      navigate('/user/goals')
+      if (!resConfig.data) {
+        const userData = await AxiosInstance.get('/User/me')
+        dispatch(createUserActionLoad(userData.data))
+        navigate('/welcome')
+      } else {
+        dispatch(createActionLoad(resConfig.data))
+        const userData = await AxiosInstance.get('/User/me')
+        dispatch(createUserActionLoad(userData.data))
+        setMessage('Successfully signed in. Redirecting ...')
+        setIsOpen(true)
+        navigate('/user/goals')
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.message)

@@ -16,12 +16,42 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import InfoIcon from '@mui/icons-material/Info'
 import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp'
-import { useSelector } from 'react-redux'
-import { Config } from '../../state/accountConfig'
+import { useDispatch, useSelector } from 'react-redux'
+import { Config, Goal, createActionDeleteGoal } from '../../state/accountConfig'
+import GoalEditDialog from './GoalsEditDialog/GoalsEditDialog'
+import { useState } from 'react'
+import AxiosInstance from '../../app/services/AxiosInstance'
 
 const BalancedTable = () => {
   const configState = useSelector((state: any) => state.accountConfig)
   const { goals }: Config = configState
+
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [goalChecked, setGoalChecked] = useState<any>(null)
+  const dispatch = useDispatch()
+
+  const handleEditGoal = (goal: Goal) => {
+    const index = goals.indexOf(goal)
+    setGoalChecked(goals[index])
+    setIsEditDialogOpen(true)
+  }
+
+  const updateDbConfig = async () => {
+    try {
+      const res = await AxiosInstance.post('/config', {
+        ...configState,
+      })
+      console.log('OK')
+    } catch (error) {
+      console.log('error')
+    }
+  }
+
+  const handleDeleteGoal = (goal: Goal) => {
+    const index = goals.indexOf(goal)
+    dispatch(createActionDeleteGoal(goals[index]))
+    // TODO:updateDbConfig()
+  }
 
   return (
     <>
@@ -58,11 +88,9 @@ const BalancedTable = () => {
                         <NavLink to={'/user/balance/details/' + i.toString()}>
                           <InfoIcon />
                         </NavLink>
-                        <NavLink to={'/user/balance/edit/' + i.toString()}>
-                          <EditIcon />
-                        </NavLink>
+                        <EditIcon onClick={() => handleEditGoal(goal)} />
                         <div>
-                          <DeleteIcon />
+                          <DeleteIcon onClick={() => handleDeleteGoal(goal)} />
                         </div>
                       </Action>
                     </ActionSection>
@@ -73,6 +101,14 @@ const BalancedTable = () => {
           </Table>
         </TableContainer>
       </section>
+      {goalChecked ? (
+        <GoalEditDialog
+          isOpen={isEditDialogOpen}
+          update={setIsEditDialogOpen}
+          goal={goalChecked}
+          updateGoal={setGoalChecked}
+        />
+      ) : null}
     </>
   )
 }
