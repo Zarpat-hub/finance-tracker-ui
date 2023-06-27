@@ -4,7 +4,7 @@ import { Card } from '@mui/material'
 export const CardsSection = styled('section')({
   display: 'flex',
   justifyContent: 'center',
-  padding: '150px 20px',
+  padding: '100px 20px',
   gap: '50px',
   '@media screen and (max-width: 800px)': {
     flexDirection: 'column',
@@ -26,6 +26,11 @@ export const CardIcon = styled('section')({
   justifyContent: 'center',
   alignItems: 'center',
   fontSize: '5rem',
+})
+
+export const SmallHeader = styled('h5')({
+  fontWeight: '400',
+  fontSize: '1.2rem',
 })
 
 export const CardItem = styled(Card)({

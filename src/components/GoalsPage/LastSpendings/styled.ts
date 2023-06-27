@@ -10,7 +10,7 @@ export const SpendingNav = styled('section')({
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#4682B4',
+    backgroundColor: '#1976d2',
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
