@@ -8,12 +8,14 @@ import {
   MenuItem,
 } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
+  Config,
   Goal,
   createActionDeleteGoal,
   createActionGoalAdd,
 } from '../../../state/accountConfig'
+import AxiosInstance from '../../../app/services/AxiosInstance'
 
 interface GoalDialogProps {
   isOpen: boolean
@@ -24,6 +26,8 @@ interface GoalDialogProps {
 
 const GoalEditDialog = (editDialog: GoalDialogProps) => {
   const dispatch = useDispatch()
+  const configState = useSelector((state: any) => state.accountConfig)
+  const { goals }: Config = configState
 
   const { register, handleSubmit, reset } = useForm<Goal>({
     defaultValues: {
@@ -70,14 +74,14 @@ const GoalEditDialog = (editDialog: GoalDialogProps) => {
             variant="standard"
             {...register('priority')}
           >
-            <MenuItem key={'Low'} value={'Low'}>
-              Low
+            <MenuItem key={'LOW'} value={'LOW'}>
+              LOW
             </MenuItem>
-            <MenuItem key={'Medium'} value={'Medium'}>
-              Medium
+            <MenuItem key={'MEDIUM'} value={'MEDIUM'}>
+              MEDIUM
             </MenuItem>
-            <MenuItem key={'High'} value={'High'}>
-              High
+            <MenuItem key={'HIGH'} value={'HIGH'}>
+              HIGH
             </MenuItem>
           </TextField>
 

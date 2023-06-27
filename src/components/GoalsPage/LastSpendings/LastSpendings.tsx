@@ -9,23 +9,8 @@ import {
 import { SpendingNav, StyledTableCell, StyledTableRow } from './styled'
 import { NavLink } from 'react-router-dom'
 import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp'
-import { useEffect, useState } from 'react'
-import AxiosInstance from '../../../app/services/AxiosInstance'
 
-const LastSpendings = () => {
-  const [dataInfo, setDataInfo] = useState<any>({
-    spendings: [],
-    incomes: [],
-  })
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await AxiosInstance.get(`/balance`).then((res) => {
-        setDataInfo(res.data)
-      })
-    }
-    fetchData()
-  }, [])
+const LastSpendings = ({ dataInfo }: any) => {
   return (
     <>
       <SpendingNav>

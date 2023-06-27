@@ -42,6 +42,12 @@ export type Earning = {
   value: number
 }
 
+export type SingleEarning = {
+  name: string
+  value: number
+  date: string
+}
+
 export type Goal = {
   value: number
   name: string

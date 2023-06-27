@@ -43,7 +43,7 @@ export const ChartComponent = () => {
     datasets: [],
   })
 
-  const [dataInfo, setDataInfo] = useState<any>({
+  const [dataInfo, setDataInfo] = useState({
     spendings: [],
     incomes: [],
   })
