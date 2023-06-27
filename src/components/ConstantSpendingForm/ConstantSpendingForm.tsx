@@ -24,35 +24,26 @@ const ConstantSpendingForm = () => {
   }
 
   const handleFormSubmit = async (data: FieldValues) => {
-    console.log(data)
-    if (data.type === 'Constant') {
-      const convertedData: Spending = {
-        category: data.category,
-        type: 'Constant',
-        frequence: data.frequence,
-        description: data.description,
-        value: Number(data.value),
-        date: data.date,
-      }
+    const convertedData: Spending = {
+      category: data.category,
+      type: data.type,
+      frequence: data.frequence,
+      description: data.description,
+      value: Number(data.value),
+      date: data.date,
+    }
 
+    if (data.type === 'Constant') {
       dispatch(createActionConstantSpendingAdd(convertedData))
       await updateDbConfig(convertedData)
     } else {
-      const convertedData: Spending = {
-        category: data.category,
-        type: 'Single',
-        frequence: data.frequence,
-        description: data.description,
-        value: Number(data.value),
-        date: data.date,
-      }
       await addSingleSpending(convertedData)
     }
   }
 
   const updateDbConfig = async (spending: Spending) => {
     try {
-      const res = await AxiosInstance.post('/config', {
+      await AxiosInstance.post('/config', {
         ...configState,
         constantSpendings: [...configState.constantSpendings, spending],
       })
@@ -69,7 +60,17 @@ const ConstantSpendingForm = () => {
   }
 
   const addSingleSpending = async (spendingData: Spending) => {
-    await AxiosInstance.post('/spending', spendingData)
+    try {
+      await AxiosInstance.post('/spending', spendingData)
+      setMessage('New spending was added')
+      setIsOpen(true)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(error.message)
+        setMessage('Wasn\t able to add spending')
+        setIsOpen(true)
+      }
+    }
   }
 
   return (
