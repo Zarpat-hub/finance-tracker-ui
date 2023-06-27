@@ -2,11 +2,13 @@ import { CardContent, Typography } from '@mui/material'
 import { CardCenterContent, CardComponent, Container } from './styled'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { BaseConfig } from '../../../state/accountConfig'
+import { BaseConfig, Config } from '../../../state/accountConfig'
 
-const BasicInfo = () => {
+const BasicInfo = ({ dataInfo }: any) => {
   const configState = useSelector((state: any) => state.accountConfig)
   const { currency, spendingLimit, payDay, balance }: BaseConfig = configState
+
+  const { goals, earnings, constantSpendings }: Config = configState
 
   const calculateDaysLeftToPayDay = () => {
     const currentDate = new Date()
@@ -17,8 +19,69 @@ const BasicInfo = () => {
     const targetDate = new Date(targetYear, targetMonth, payDay)
     const timeDiff = targetDate.getTime() - currentDate.getTime()
     const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
-
     return daysLeft
+  }
+
+  const calculateMonthlyIncomes = () => {
+    const constantEarnings = earnings?.reduce((acc: number, curr: any) => {
+      return acc + Number(curr.value)
+    }, 0)
+
+    const singeIncomes = dataInfo?.incomes.reduce((acc: number, curr: any) => {
+      const currentDate = new Date()
+      const infoDate = new Date(curr.date)
+      if (
+        currentDate.getFullYear() === infoDate.getFullYear() &&
+        currentDate.getMonth() === infoDate.getMonth()
+      ) {
+        return acc + Number(curr.value)
+      }
+      return acc + 0
+    }, 0)
+
+    return Number(singeIncomes) + Number(constantEarnings)
+  }
+
+  const calculateAnnualIncomes = () => {
+    const constantEarnings = earnings?.reduce((acc: number, curr: any) => {
+      return acc + Number(curr.value)
+    }, 0)
+
+    const singeIncomes = dataInfo?.incomes.reduce((acc: number, curr: any) => {
+      const currentDate = new Date()
+      const infoDate = new Date(curr.date)
+      if (currentDate.getFullYear() === infoDate.getFullYear()) {
+        return acc + Number(curr.value)
+      }
+      return acc + 0
+    }, 0)
+
+    return Number(singeIncomes) + Number(constantEarnings)
+  }
+
+  const calculateMonthlySpendings = () => {
+    const constantSpendingsValue = constantSpendings?.reduce(
+      (acc: number, curr: any) => {
+        return acc + Number(curr.value)
+      },
+      0
+    )
+
+    const singeSpendings = dataInfo?.spendings?.reduce(
+      (acc: number, curr: any) => {
+        const currentDate = new Date()
+        const infoDate = new Date(curr.date)
+        if (
+          currentDate.getFullYear() === infoDate.getFullYear() &&
+          currentDate.getMonth() === infoDate.getMonth()
+        ) {
+          return acc + Number(curr.value)
+        }
+        return acc + 0
+      },
+      0
+    )
+    return Number(singeSpendings) + Number(constantSpendingsValue)
   }
 
   return (
@@ -30,7 +93,8 @@ const BasicInfo = () => {
               Monthly incomes
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              5237,63{` ${currency}`}
+              {calculateMonthlyIncomes()}
+              {` ${currency}`}
             </Typography>
           </CardContent>
         </CardComponent>
@@ -40,7 +104,8 @@ const BasicInfo = () => {
               Annual incomes
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              62851,56{` ${currency}`}
+              {calculateAnnualIncomes()}
+              {` ${currency}`}
             </Typography>
           </CardContent>
         </CardComponent>
@@ -89,7 +154,8 @@ const BasicInfo = () => {
               Monthly spending limit
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              2000,04{` ${currency} / ${spendingLimit} ${currency}`}
+              {calculateMonthlySpendings()}
+              {` ${currency} / ${spendingLimit} ${currency}`}
             </Typography>
           </CardContent>
         </CardComponent>

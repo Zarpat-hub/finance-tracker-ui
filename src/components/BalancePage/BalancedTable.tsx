@@ -21,13 +21,16 @@ import { Config, Goal, createActionDeleteGoal } from '../../state/accountConfig'
 import GoalEditDialog from './GoalsEditDialog/GoalsEditDialog'
 import { useState } from 'react'
 import AxiosInstance from '../../app/services/AxiosInstance'
+import GoalsInfoDialog from './GoalsInfoDialog/GoalsInfoDialog'
 
 const BalancedTable = () => {
   const configState = useSelector((state: any) => state.accountConfig)
   const { goals }: Config = configState
 
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [isInfoDialogOpen, setIsInfoDialogOpen] = useState(false)
   const [goalChecked, setGoalChecked] = useState<any>(null)
+  const [goalInfoChecked, setGoalInfoChecked] = useState<any>(null)
   const dispatch = useDispatch()
 
   const handleEditGoal = (goal: Goal) => {
@@ -36,12 +39,18 @@ const BalancedTable = () => {
     setIsEditDialogOpen(true)
   }
 
-  const updateDbConfig = async () => {
+  const handleInfoGoal = (goal: Goal) => {
+    const index = goals.indexOf(goal)
+    setGoalInfoChecked(goals[index])
+    setIsInfoDialogOpen(true)
+  }
+
+  const updateDbConfig = async (goals: Goal[]) => {
     try {
-      const res = await AxiosInstance.post('/config', {
+      await AxiosInstance.post('/config', {
         ...configState,
+        goals: [...goals],
       })
-      console.log('OK')
     } catch (error) {
       console.log('error')
     }
@@ -50,7 +59,9 @@ const BalancedTable = () => {
   const handleDeleteGoal = (goal: Goal) => {
     const index = goals.indexOf(goal)
     dispatch(createActionDeleteGoal(goals[index]))
-    // TODO:updateDbConfig()
+    goals.splice(index, 1)
+    // console.log(goals)
+    updateDbConfig(goals)
   }
 
   return (
@@ -85,9 +96,8 @@ const BalancedTable = () => {
                     <ActionSection>
                       <section>{goal.deadline}</section>
                       <Action>
-                        <NavLink to={'/user/balance/details/' + i.toString()}>
-                          <InfoIcon />
-                        </NavLink>
+                        <InfoIcon onClick={() => handleInfoGoal(goal)} />
+
                         <EditIcon onClick={() => handleEditGoal(goal)} />
                         <div>
                           <DeleteIcon onClick={() => handleDeleteGoal(goal)} />
@@ -107,6 +117,14 @@ const BalancedTable = () => {
           update={setIsEditDialogOpen}
           goal={goalChecked}
           updateGoal={setGoalChecked}
+        />
+      ) : null}
+      {goalInfoChecked ? (
+        <GoalsInfoDialog
+          isOpen={isInfoDialogOpen}
+          update={setIsInfoDialogOpen}
+          goal={goalInfoChecked}
+          updateGoal={setGoalInfoChecked}
         />
       ) : null}
     </>

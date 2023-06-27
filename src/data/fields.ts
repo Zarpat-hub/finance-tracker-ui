@@ -92,7 +92,7 @@ export const goalFields: IFormField[] = [
     errorMessage: '',
     required: true,
     type: 'select',
-    options: ['Low', 'Medium', 'High'],
+    options: ['LOW', 'MEDIUM', 'HIGH'],
   },
   {
     name: 'deadline',
@@ -112,6 +112,14 @@ export const goalFields: IFormField[] = [
 
 export const spendingFields: IFormField[] = [
   {
+    name: 'type',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'select',
+    options: ['Constant', 'Single'],
+  },
+  {
     name: 'category',
     pattern: /(.*?)/,
     errorMessage: '',
@@ -129,6 +137,13 @@ export const spendingFields: IFormField[] = [
       'Debt',
       'Other',
     ],
+  },
+  {
+    name: 'date',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'date',
   },
   {
     name: 'frequence',
@@ -166,5 +181,28 @@ export const earningFields: IFormField[] = [
     errorMessage: '',
     required: true,
     type: 'number',
+  },
+]
+
+export const constantIncomeFields: IFormField[] = [
+  {
+    name: 'name',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+  },
+  {
+    name: 'value',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'number',
+  },
+  {
+    name: 'date',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'date',
   },
 ]
