@@ -15,9 +15,9 @@ export const HeaderSection = styled('header')({
 export const LandingPageInfoPanel = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  width: '50%',
+  width: '40%',
   gap: '30px',
-  '@media screen and (max-width: 600px)': {
+  '@media screen and (max-width: 700px)': {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -31,9 +31,9 @@ export const ButtonSection = styled('div')({
 })
 
 export const LandingPageSlajderInfo = styled('section')({
-  width: '400px',
+  width: '700px',
 
-  '@media screen and (max-width: 600px)': {
+  '@media screen and (max-width: 700px)': {
     display: 'none',
   },
 })
