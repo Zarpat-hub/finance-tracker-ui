@@ -1,3 +1,5 @@
+import { Button } from '@mui/material'
+import { NavLink } from 'react-router-dom'
 import WealthWiseLogo from '../../../assets/logos/wealthWiseMain.svg'
 import ContentCenterWrapper from '../../../components/ContentCenterWrapper'
 const RegistrationInfo = () => {
@@ -12,6 +14,11 @@ const RegistrationInfo = () => {
           <h3>We have sent you an email confirmation!</h3>
           <p>Check your inbox and confirm</p>
         </section>
+        <Button variant="contained" type="submit">
+          <NavLink to="/login" className="link whitesmoke">
+            Login
+          </NavLink>
+        </Button>
       </section>
     </ContentCenterWrapper>
   )
