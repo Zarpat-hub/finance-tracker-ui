@@ -11,6 +11,7 @@ import {
   Label,
   LabelImg,
   MainContainer,
+  Panel,
 } from './styled'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -22,18 +23,22 @@ import {
 interface IFormInput {
   username: string
   email: string
+  firstName: string
+  lastName: string
 }
 
 const UserInfo = () => {
   const userState = useSelector((state: any) => state.userData)
 
-  const { userImg, username, email }: UserData = userState
+  const { userImg, username, email, firstName, lastName }: UserData = userState
   const dispatch = useDispatch()
 
   const { register, getValues } = useForm<IFormInput>({
     defaultValues: {
       username,
       email,
+      firstName,
+      lastName,
     },
   })
 
@@ -97,26 +102,48 @@ const UserInfo = () => {
 
         <form>
           <ControlsSection>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name1"
-              label="username"
-              type="text"
-              variant="standard"
-              disabled={true}
-              {...register('username')}
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              required={true}
-              id="name2"
-              label="E-mail"
-              type="email"
-              variant="standard"
-              {...register('email')}
-            />
+            <Panel>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name1"
+                label="username"
+                type="text"
+                variant="standard"
+                disabled={true}
+                {...register('username')}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                required={true}
+                id="name2"
+                label="E-mail"
+                type="email"
+                variant="standard"
+                {...register('email')}
+              />
+            </Panel>
+            <Panel>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name3"
+                label="firstName"
+                type="text"
+                variant="standard"
+                {...register('firstName')}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name4"
+                label="lastname"
+                type="text"
+                variant="standard"
+                {...register('lastName')}
+              />
+            </Panel>
           </ControlsSection>
         </form>
         <ButtonsSection>

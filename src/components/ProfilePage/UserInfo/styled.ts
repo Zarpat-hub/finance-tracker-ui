@@ -44,6 +44,14 @@ export const Header = styled('h2')({
   margin: '20px',
 })
 
+export const Panel = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-end',
+  alignContent: 'flex-end',
+  justifyContent: 'flex-end',
+})
+
 export const ButtonUpload = styled(Button)({
   margin: '20px 0',
   width: '100px',

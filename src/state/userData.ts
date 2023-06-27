@@ -6,6 +6,8 @@ export type UserData = {
   username: string
   email: string
   userImg: string
+  firstName: string
+  lastName: string
 }
 
 export const createUserActionLoad = (userData: any) => {
@@ -33,6 +35,8 @@ export const initialState: UserData = {
   username: '',
   email: '',
   userImg: '',
+  firstName: '',
+  lastName: '',
 }
 
 export const reducer = (
@@ -52,6 +56,8 @@ export const reducer = (
         ...state,
         username: action.payload.username,
         email: action.payload.email,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
       }
     default:
       return state
