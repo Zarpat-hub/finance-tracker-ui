@@ -4,7 +4,7 @@ export const Section = styled('section')({
   display: 'flex',
   justifyContent: 'center',
   padding: '50px 20px',
-  backgroundColor: '#444444',
+  backgroundColor: '#1565c0',
   color: 'whitesmoke',
 })
 

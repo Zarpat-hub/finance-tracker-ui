@@ -6,56 +6,59 @@ import {
   CardActions,
   Button,
 } from '@mui/material'
-import { CardsSection } from './styled'
-
+import { CardIcon, CardItem, CardsSection, Header } from './styled'
+import PaymentsIcon from '@mui/icons-material/Payments'
+import SavingsIcon from '@mui/icons-material/Savings'
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 const Cards = () => {
   return (
     <CardsSection>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          image="/static/images/cards/contemplative-reptile.jpg" // change
-        />
+      <CardItem sx={{ maxWidth: 345 }}>
+        <CardIcon>
+          <SavingsIcon fontSize="inherit" />
+        </CardIcon>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Test01
-          </Typography>
+          <Header>
+            Streamline your finances and achieve financial success.
+          </Header>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            Our comprehensive finance management tools allow you to streamline
+            your finances effortlessly, providing you with the foundation to
+            achieve your financial goals and unlock your path to success.
           </Typography>
         </CardContent>
-      </Card>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          image="/static/images/cards/contemplative-reptile.jpg" // change
-        />
+      </CardItem>
+      <CardItem sx={{ maxWidth: 345 }}>
+        <CardIcon>
+          <PaymentsIcon fontSize="inherit" />
+        </CardIcon>
+
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Test02
-          </Typography>
+          <Header>
+            Track, manage, and optimize your finances effortlessly.
+          </Header>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            Effortlessly track, manage, and optimize your finances with our
+            intuitive platform. From expense tracking to budgeting and beyond,
+            our tools simplify your financial journey, so you can focus on what
+            matters most.
           </Typography>
         </CardContent>
-      </Card>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          image="/static/images/cards/contemplative-reptile.jpg" // change
-        />
+      </CardItem>
+      <CardItem sx={{ maxWidth: 345 }}>
+        <CardIcon>
+          <AccountBalanceWalletIcon fontSize="inherit" />
+        </CardIcon>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Test03
-          </Typography>
+          <Header>Stay in control of your finances</Header>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            Stay in control of your finances with ease and confidence using our
+            robust financial management tools. From tracking your income and
+            expenses to monitoring investments, our platform puts you in the
+            {"driver's"} seat.
           </Typography>
         </CardContent>
-      </Card>
+      </CardItem>
     </CardsSection>
   )
 }
