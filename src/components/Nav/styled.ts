@@ -9,7 +9,7 @@ export const NavBar = styled('nav')({
   justifyContent: 'space-between',
   padding: '0 10px',
   margin: '0 0 20px 0',
-  backgroundColor: '#4682B4',
+  backgroundColor: '#1976d2',
   boxShadow: '0 4px 2px -2px gray',
 })
 

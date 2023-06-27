@@ -1,17 +1,31 @@
-import { styled } from '@mui/material'
+import { Card, styled } from '@mui/material'
 
 export const Section = styled('section')({
   display: 'flex',
-  justifyContent: 'center',
-  padding: '50px 20px',
-  backgroundColor: '#1565c0',
-  color: 'whitesmoke',
+  color: '#444',
 })
 
 export const SectionValue = styled('section')({
-  width: '1200px',
+  padding: '50px',
+
   '& p': {
-    textAlign: 'center',
-    fontSize: '1.5rem',
+    marginTop: '20px',
+    fontSize: '2rem',
   },
+})
+
+export const SpanInfo = styled('span')({
+  color: '#1976d2',
+})
+
+export const Header = styled('h2')({
+  fontSize: '3rem',
+})
+
+export const LongCard = styled(Card)({
+  minHeight: '150px',
+  fontSize: '1.5rem',
+  textAlign: 'center',
+  display: 'flex',
+  justifyContent: 'center',
 })
