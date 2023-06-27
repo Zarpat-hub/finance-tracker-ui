@@ -24,16 +24,30 @@ const ConstantSpendingForm = () => {
   }
 
   const handleFormSubmit = async (data: FieldValues) => {
-    const convertedData: Spending = {
-      category: data.category,
-      type: 'Constant',
-      frequence: data.frequence,
-      description: data.description,
-      value: Number(data.value),
-    }
+    console.log(data)
+    if (data.type === 'Constant') {
+      const convertedData: Spending = {
+        category: data.category,
+        type: 'Constant',
+        frequence: data.frequence,
+        description: data.description,
+        value: Number(data.value),
+        date: data.date,
+      }
 
-    dispatch(createActionConstantSpendingAdd(convertedData))
-    await updateDbConfig(convertedData)
+      dispatch(createActionConstantSpendingAdd(convertedData))
+      await updateDbConfig(convertedData)
+    } else {
+      const convertedData: Spending = {
+        category: data.category,
+        type: 'Single',
+        frequence: data.frequence,
+        description: data.description,
+        value: Number(data.value),
+        date: data.date,
+      }
+      await addSingleSpending(convertedData)
+    }
   }
 
   const updateDbConfig = async (spending: Spending) => {
@@ -54,12 +68,16 @@ const ConstantSpendingForm = () => {
     }
   }
 
+  const addSingleSpending = async (spendingData: Spending) => {
+    await AxiosInstance.post('/spending', spendingData)
+  }
+
   return (
     <FormProvider {...methods}>
       <Box sx={{ pb: 5 }}>
         <Form
           onSubmitHandler={handleFormSubmit}
-          title={'Add new single spending'}
+          title={'Add new spending'}
           submitText={'Add spending'}
           formFields={spendingFields}
         />

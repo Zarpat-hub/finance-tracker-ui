@@ -10,6 +10,7 @@ import {
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 import { ChartCanvas, ChartOption, ChartSection, Option } from './styled'
+import AxiosInstance from '../../../app/services/AxiosInstance'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -17,58 +18,6 @@ enum TypesOfTime {
   WEEK = 'Week',
   MONTH = 'Month',
   YEAR = 'YEAR',
-}
-
-export const MockData = {
-  spendings: [
-    {
-      date: '2023-01-05',
-      value: 4000,
-      description: 'Car sell',
-    },
-    {
-      date: '2023-06-21',
-      value: 3200,
-      description: 'PC sell',
-    },
-    {
-      date: '2023-06-22',
-      value: 3200,
-      description: 'PC sell',
-    },
-    {
-      date: '2023-06-22',
-      value: 3200,
-      description: 'PC sell',
-    },
-    {
-      date: '2023-10-05',
-      value: 800,
-      description: 'PC sell',
-    },
-  ],
-  incomes: [
-    {
-      date: '2023-06-01',
-      value: 4500,
-      description: 'Car sell',
-    },
-    {
-      date: '2023-01-01',
-      value: 5000,
-      description: 'Car sell',
-    },
-    {
-      date: '2023-06-22',
-      value: 6200,
-      description: 'PC sell',
-    },
-    {
-      date: '2023-10-05',
-      value: 800,
-      description: 'PC sell',
-    },
-  ],
 }
 
 const Months = [
@@ -94,28 +43,43 @@ export const ChartComponent = () => {
     datasets: [],
   })
 
+  const [dataInfo, setDataInfo] = useState<any>({
+    spendings: [],
+    incomes: [],
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await AxiosInstance.get(`/balance`).then((res) => {
+        setDataInfo(res.data)
+      })
+    }
+    fetchData()
+  }, [])
+
   useEffect(() => {
     setDataChart({
       labels,
       datasets: [
         {
           label: 'Spendings',
-          data: prepareDataFn(MockData.spendings),
+          data: prepareDataFn(dataInfo.spendings),
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
         },
         {
           label: 'Incomes',
-          data: prepareDataFn(MockData.incomes),
+          data: prepareDataFn(dataInfo.incomes),
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         },
       ],
     })
-  }, [time])
+  }, [time, dataInfo])
 
   const handlePeriod = (perdiod: string) => {
     switch (perdiod) {
       case TypesOfTime.WEEK:
         setTime(TypesOfTime.WEEK)
+
         const curr = new Date()
         const firstDayOfWeek = curr.getDate() - curr.getDay()
         const lastDayOfWeek = firstDayOfWeek + 6

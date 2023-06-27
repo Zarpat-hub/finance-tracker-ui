@@ -112,6 +112,14 @@ export const goalFields: IFormField[] = [
 
 export const spendingFields: IFormField[] = [
   {
+    name: 'type',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'select',
+    options: ['Constant', 'Single'],
+  },
+  {
     name: 'category',
     pattern: /(.*?)/,
     errorMessage: '',
@@ -129,6 +137,13 @@ export const spendingFields: IFormField[] = [
       'Debt',
       'Other',
     ],
+  },
+  {
+    name: 'date',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'date',
   },
   {
     name: 'frequence',

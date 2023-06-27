@@ -9,23 +9,23 @@ import {
 import { SpendingNav, StyledTableCell, StyledTableRow } from './styled'
 import { NavLink } from 'react-router-dom'
 import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp'
+import { useEffect, useState } from 'react'
+import AxiosInstance from '../../../app/services/AxiosInstance'
 
 const LastSpendings = () => {
-  const rows = [
-    {
-      date: '2022-04-04',
-      category: 'AGD',
-      description: 'New TV',
-      amount: '2000',
-    },
-    {
-      date: '2022-04-04',
-      category: 'AGD',
-      description: 'New TV',
-      amount: '2000',
-    },
-  ]
+  const [dataInfo, setDataInfo] = useState<any>({
+    spendings: [],
+    incomes: [],
+  })
 
+  useEffect(() => {
+    const fetchData = async () => {
+      await AxiosInstance.get(`/balance`).then((res) => {
+        setDataInfo(res.data)
+      })
+    }
+    fetchData()
+  }, [])
   return (
     <>
       <SpendingNav>
@@ -49,7 +49,7 @@ const LastSpendings = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, i) => (
+              {dataInfo.spendings?.map((row: any, i: number) => (
                 <StyledTableRow key={i}>
                   <StyledTableCell component="th" scope="row" align="left">
                     {row.date}
@@ -58,7 +58,7 @@ const LastSpendings = () => {
                   <StyledTableCell align="left">
                     {row.description}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{row.amount}</StyledTableCell>
+                  <StyledTableCell align="right">{row.value}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

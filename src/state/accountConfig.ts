@@ -18,7 +18,7 @@ type Categories =
   | 'Debt'
   | 'Other'
 type Frequence = 'Weekly' | 'Monthly' | 'Yearly'
-type SpendingType = 'Constant'
+type SpendingType = 'Constant' | 'Single'
 type Priority = 'Low' | 'Medium' | 'High'
 
 export type BaseConfig = {
@@ -34,6 +34,7 @@ export type Spending = {
   frequence: Frequence
   description: string
   value: number
+  date: string
 }
 
 export type Earning = {
