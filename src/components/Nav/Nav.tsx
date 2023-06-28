@@ -51,8 +51,8 @@ const Nav = () => {
         <NavLink to="goals">
           <img src={WealthWiseLogo} />
         </NavLink>
-        <NavBarMenuItem to="goals">My goals</NavBarMenuItem>
-        <NavBarMenuItem to="balance">Balance</NavBarMenuItem>
+        <NavBarMenuItem to="goals">Dashboard</NavBarMenuItem>
+        <NavBarMenuItem to="balance">Goals</NavBarMenuItem>
       </NavBarLogo>
       <NavBarUser>
         <NavBarButton

@@ -26,6 +26,7 @@ const AccountConfigForm = () => {
       balance: Number(data.balance),
       currency: data.currency,
       payDay: Number(data.payDay),
+      savings: Number(data.savings),
       spendingLimit: Number(data.spendingLimit),
     }
     dispatch(createActionBaseUpdate(convertedData))

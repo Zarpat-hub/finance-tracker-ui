@@ -23,6 +23,7 @@ type Priority = 'Low' | 'Medium' | 'High'
 
 export type BaseConfig = {
   currency: string
+  savings: number
   balance: number
   payDay: number
   spendingLimit: number
@@ -58,6 +59,7 @@ export type Goal = {
 export type Config = {
   currency: string
   balance: number
+  savings: number
   payDay: number
   spendingLimit: number
   earnings: Earning[]
@@ -118,6 +120,7 @@ export const initialState: Config = {
   currency: '',
   balance: 0,
   payDay: 0,
+  savings: 0,
   spendingLimit: 0,
   earnings: [],
   constantSpendings: [],
