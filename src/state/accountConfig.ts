@@ -5,6 +5,7 @@ const ADD_EARNING = 'config/ADD_EARNING'
 const ADD_GOAL = 'config/ADD_GOAL'
 const EDIT_GOAL = 'config/EDIT_GOAL'
 const DELETE_GOAL = 'config/DELETE_GOAL'
+const ADD_SINGLE_EARNING = 'config/ADD_SINGLE_EARNING'
 
 type Categories =
   | 'Food'
@@ -71,6 +72,13 @@ export const createActionBaseUpdate = (baseConfig: BaseConfig) => {
   return {
     type: UPDATE_BASE,
     payload: baseConfig,
+  }
+}
+
+export const createAddSingleEarning = (test: any) => {
+  return {
+    type: ADD_SINGLE_EARNING,
+    payload: test,
   }
 }
 
@@ -153,6 +161,8 @@ export const reducer = (
         ...state,
         goals: newArray,
       }
+    case ADD_SINGLE_EARNING:
+      return { ...state, balance: state.balance + Number(action.payload.value) }
 
     default:
       return state

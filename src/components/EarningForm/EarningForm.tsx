@@ -7,6 +7,7 @@ import { useState } from 'react'
 import AxiosInstance from '../../app/services/AxiosInstance'
 import {
   createActionEarningAdd,
+  createAddSingleEarning,
   Earning,
   SingleEarning,
 } from '../../state/accountConfig'
@@ -41,6 +42,7 @@ const EarningForm = () => {
       value: Number(data.value),
       date: data.date,
     }
+    dispatch(createAddSingleEarning(convertedData))
     try {
       await AxiosInstance.post('/income', convertedData)
       reset()
