@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { SubmitButton } from '../../../components/Form/styled'
 import AxiosInstance from '../../services/AxiosInstance'
+import ContentCenterWrapper from '../../../components/ContentCenterWrapper'
 
 const ActivateAccount = () => {
   const { token } = useParams()
@@ -18,7 +19,8 @@ const ActivateAccount = () => {
   }
 
   return (
-    <>
+    <ContentCenterWrapper>
+      <h2>Click button to activate your account</h2>
       <SubmitButton
         variant={'contained'}
         size={'large'}
@@ -27,7 +29,7 @@ const ActivateAccount = () => {
       >
         Activate account
       </SubmitButton>
-    </>
+    </ContentCenterWrapper>
   )
 }
 

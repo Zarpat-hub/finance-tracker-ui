@@ -64,6 +64,13 @@ export const configurationFields: IFormField[] = [
     type: 'number',
   },
   {
+    name: 'savings',
+    pattern: /(.*?)/,
+    errorMessage: '',
+    required: true,
+    type: 'number',
+  },
+  {
     name: 'payDay',
     pattern: /(.*?)/,
     errorMessage: '',

@@ -5,6 +5,7 @@ const ADD_EARNING = 'config/ADD_EARNING'
 const ADD_GOAL = 'config/ADD_GOAL'
 const EDIT_GOAL = 'config/EDIT_GOAL'
 const DELETE_GOAL = 'config/DELETE_GOAL'
+const ADD_SINGLE_EARNING = 'config/ADD_SINGLE_EARNING'
 
 type Categories =
   | 'Food'
@@ -23,6 +24,7 @@ type Priority = 'Low' | 'Medium' | 'High'
 
 export type BaseConfig = {
   currency: string
+  savings: number
   balance: number
   payDay: number
   spendingLimit: number
@@ -58,6 +60,7 @@ export type Goal = {
 export type Config = {
   currency: string
   balance: number
+  savings: number
   payDay: number
   spendingLimit: number
   earnings: Earning[]
@@ -69,6 +72,13 @@ export const createActionBaseUpdate = (baseConfig: BaseConfig) => {
   return {
     type: UPDATE_BASE,
     payload: baseConfig,
+  }
+}
+
+export const createAddSingleEarning = (test: any) => {
+  return {
+    type: ADD_SINGLE_EARNING,
+    payload: test,
   }
 }
 
@@ -118,6 +128,7 @@ export const initialState: Config = {
   currency: '',
   balance: 0,
   payDay: 0,
+  savings: 0,
   spendingLimit: 0,
   earnings: [],
   constantSpendings: [],
@@ -150,6 +161,8 @@ export const reducer = (
         ...state,
         goals: newArray,
       }
+    case ADD_SINGLE_EARNING:
+      return { ...state, balance: state.balance + Number(action.payload.value) }
 
     default:
       return state

@@ -41,6 +41,7 @@ const LoginForm = () => {
         navigate('/welcome')
       } else {
         dispatch(createActionLoad(resConfig.data))
+        console.log(resConfig.data)
         const userData = await AxiosInstance.get('/User/me')
         dispatch(createUserActionLoad(userData.data))
         setMessage('Successfully signed in. Redirecting ...')

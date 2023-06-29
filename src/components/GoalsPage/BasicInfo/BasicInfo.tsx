@@ -6,7 +6,8 @@ import { BaseConfig, Config } from '../../../state/accountConfig'
 
 const BasicInfo = ({ dataInfo }: any) => {
   const configState = useSelector((state: any) => state.accountConfig)
-  const { currency, spendingLimit, payDay, balance }: BaseConfig = configState
+  const { currency, spendingLimit, payDay, balance, savings }: BaseConfig =
+    configState
 
   const { goals, earnings, constantSpendings }: Config = configState
 
@@ -141,7 +142,17 @@ const BasicInfo = ({ dataInfo }: any) => {
         <CardComponent>
           <CardContent>
             <Typography gutterBottom variant="h4" component="div">
-              Accout Balance
+              Your Savings
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {`${savings} ${currency}`}
+            </Typography>
+          </CardContent>
+        </CardComponent>
+        <CardComponent>
+          <CardContent>
+            <Typography gutterBottom variant="h4" component="div">
+              Account Balance
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {`${balance} ${currency}`}
